@@ -272,10 +272,14 @@
         text: 'Es tevi mīlu katru dienu vairāk.'
       }
     ];
-    const today = new Date();
+    // Helper to compare only date part (ignore time)
+    function toDateOnly(date) {
+      return new Date(date.getFullYear(), date.getMonth(), date.getDate());
+    }
+    const today = toDateOnly(new Date());
     const calendarDays = document.querySelectorAll('.calendar-day');
     calendarDays.forEach((btn, idx) => {
-      const btnDate = new Date(btn.dataset.day);
+      const btnDate = toDateOnly(new Date(btn.dataset.day));
       if (today >= btnDate) {
         btn.disabled = false;
         btn.classList.add('unlocked');
